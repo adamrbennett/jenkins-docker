@@ -1,0 +1,58 @@
+<form name="orderForm" ng-cloak>
+
+    <md-content class="md-padding" layout-xs="column" layout="row" layout-align="center">
+        <div flex-xs flex-gt-xs="50" layout="column">
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Order a Coffee</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <md-input-container class="md-block">
+                        <label>Order Name</label>
+                        <input ng-model="order.name">
+                    </md-input-container>
+
+                    <h4>Type</h4>
+                    <md-radio-group ng-model="order.type" class="md-block">
+
+                        <md-radio-button value="drip">Drip</md-radio-button>
+                        <md-radio-button value="pour-over">Pour Over</md-radio-button>
+                        <md-radio-button value="french-press">French Press</md-radio-button>
+
+                    </md-radio-group>
+
+                    <md-input-container class="md-block">
+                        <label>Roast</label>
+                        <md-select ng-model="order.roast">
+                            <md-option ng-value="roast.name" ng-repeat="roast in roasts">{{roast.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Extras</label>
+                        <md-select ng-model="order.extras" multiple>
+                            <md-option ng-value="extra.name" ng-repeat="extra in extras">{{extra.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="reset()">Reset</md-button>
+                    <md-button ng-click="save(order)">Place Order</md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </md-content>
+
+</form>
+
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="saveDialog">
+        <md-dialog layout-padding>
+            <h2>Your order is ready</h2>
+            <pre style="background-color: #efefef">{{order | json}}</pre>
+            <md-button ng-click="dialog.hide(); reset()">Gimme!</md-button>
+        </md-dialog>
+    </div>
+</div>

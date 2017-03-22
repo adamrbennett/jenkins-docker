@@ -1,0 +1,45 @@
+version: '2'
+
+services:
+  jenkins:
+    image: jenkins-ps
+    build:
+      context: ./jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /usr/bin/docker:/usr/bin/docker
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/abennett/.ssh:/var/jenkins_home/.ssh
+    group_add:
+      - "999"
+    links:
+      - registry:registry
+    depends_on:
+      - registry
+  registry:
+    image: registry:2
+    hostname: registry
+    ports:
+      - "5000:5000"
+    # environment:
+    #   - REGISTRY_HTTP_SECRET=letmein
+  app:
+    image: jenkins-docker-app
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - APP_PORT=80
+  unit-test:
+    image: jenkins-docker-unit-test
+    build:
+      context: ./app
+      dockerfile: Dockerfile.unit-test
+    links:
+      - app:app
+    depends_on:
+      - app
