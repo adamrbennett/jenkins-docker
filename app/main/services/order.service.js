@@ -1,8 +1,9 @@
 angular.
 module('services').
-service('orderService', function() {
+service('orderService', ['$http', 'apiRoot', function($http, apiRoot) {
     this.placeOrder = function(order) {
-        order.id = Math.floor(Math.random() * (1000 - 1)) + 1;
-        return order;
+        return $http.post(apiRoot + '/orders', order).then(function(res) {
+          return res.data;
+        });
     };
-});
+}]);

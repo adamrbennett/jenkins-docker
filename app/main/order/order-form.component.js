@@ -2,7 +2,7 @@ angular.
 module('order').
 component('orderForm', {
     templateUrl: '/main/order/order-form.template.html',
-    controller: function($scope, roastsService, extrasService, orderService, $mdDialog) {
+    controller: function($scope, $mdDialog, roastsService, extrasService, orderService) {
         var initial = {
             name: '',
             type: '',
@@ -12,11 +12,18 @@ component('orderForm', {
 
         $scope.dialog = $mdDialog;
 
-        $scope.roasts = roastsService.getRoasts();
-        $scope.extras = extrasService.getExtras();
+        roastsService.getRoasts().then(function(roasts) {
+          $scope.roasts = roasts;
+        });
+
+        extrasService.getExtras().then(function(extras) {
+          $scope.extras = extras;
+        });
 
         $scope.save = function(order) {
-            $scope.order = orderService.placeOrder(order);
+            orderService.placeOrder(order).then(function(res) {
+              $scope.order = res;
+            });
 
             $mdDialog.show({
                 contentElement: '#saveDialog',

@@ -1,6 +1,6 @@
 node {
   git 'git@github.com:adamrbennett/jenkins-docker.git'
-  
+
   def nodejs = docker.image('node:7.4');
 
   stage('Unit Test') {
@@ -20,7 +20,10 @@ node {
   }
 
   stage('Acceptance Test') {
-
+    nodejs.inside {
+      sh 'npm -q install --prefix api'
+      sh 'npm --prefix api test'
+    }
   }
 
   docker.withRegistry('http://localhost:5000/') {

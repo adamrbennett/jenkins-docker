@@ -1,11 +1,9 @@
 angular.
 module('services').
-service('extrasService', function() {
+service('extrasService', ['$http', 'apiRoot', function($http, apiRoot) {
     this.getExtras = function() {
-        return [
-            {name: 'Whipped Cream'},
-            {name: 'Cinnamon'},
-            {name: 'Chocolate Shavings'}
-        ];
+      return $http.get(apiRoot + '/extras').then(function(res) {
+        return res.data;
+      });
     };
-});
+}]);

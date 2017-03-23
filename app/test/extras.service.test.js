@@ -1,16 +1,23 @@
 describe('extras.service', function() {
 
     describe('#getExtras', function() {
+        var mockExtras = [
+          {name: 'Extra 1'},
+          {name: 'Extra 2'}
+        ];
 
         beforeEach(angular.mock.module('services'));
-
-        it('should return an array', inject(function(extrasService) {
-            var extras = extrasService.getExtras();
-            assert(Array.isArray(extras), 'did not return an array');
+        beforeEach(angular.mock.module(function($provide) {
+            $provide.constant('apiRoot', 'http://localhost:3000');
         }));
 
-        it('should return objects with name properties', inject(function(extrasService) {
-            var extras = extrasService.getExtras();
+        it('should return an array of objects with name properties', inject(function($httpBackend, apiRoot, extrasService) {
+            $httpBackend.whenGET(apiRoot + '/extras').respond(200, mockExtras);
+            var extras;
+            extrasService.getExtras().then(function(res) {
+              extras = res;
+            });
+            $httpBackend.flush();
 
             assert.isOk(extras, 'returned nothing');
             assert.typeOf(extras, 'array', 'did not return an array');

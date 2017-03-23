@@ -1,11 +1,9 @@
 angular.
 module('services').
-service('roastsService', function() {
+service('roastsService', ['$http', 'apiRoot', function($http, apiRoot) {
     this.getRoasts = function() {
-        return [
-            {name: 'Light'},
-            {name: 'Medium'},
-            {name: 'Dark'}
-        ];
+      return $http.get(apiRoot + '/roasts').then(function(res) {
+        return res.data;
+      });
     };
-});
+}]);
