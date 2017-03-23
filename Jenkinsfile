@@ -35,6 +35,13 @@ node {
     ])
   }
 
+  stage('Integration Test') {
+    nodejs.inside {
+      sh 'npm -q install --prefix api'
+      sh 'TEST_DIR=./api ./api/node_modules/jenkins-mocha/bin/jenkins.js --no-coverage'
+    }
+  }
+
   docker.withRegistry('http://localhost:5000/') {
     def img
 
