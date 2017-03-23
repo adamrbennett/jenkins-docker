@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "cucumber": "^2.0.0-rc.9"
+    "cucumber": "^2.0.0-rc.9",
+    "cucumber-html-reporter": "^0.3.7"
   }
 }

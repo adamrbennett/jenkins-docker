@@ -23,7 +23,16 @@ node {
     nodejs.inside {
       sh 'npm -q install --prefix api'
       sh './api/node_modules/cucumber/bin/cucumber.js ./api/features --format=json > ./api/test-results.json'
+      sh 'node ./api/test-report.js'
     }
+    publishHTML (target: [
+      allowMissing: false,
+      alwaysLinkToLastBuild: false,
+      keepAll: false,
+      reportDir: 'api',
+      reportFiles: 'test-report.html',
+      reportName: "Acceptance Report"
+    ])
   }
 
   docker.withRegistry('http://localhost:5000/') {
