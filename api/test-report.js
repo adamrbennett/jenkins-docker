@@ -3,7 +3,7 @@ var reporter = require('cucumber-html-reporter');
 process.chdir(__dirname);
 
 var options = {
-    theme: 'bootstrap',
+    theme: 'simple',
     jsonFile: 'test-results.json',
     output: 'test-results.html',
     reportSuiteAsScenarios: true,
