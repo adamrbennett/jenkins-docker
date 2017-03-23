@@ -15,7 +15,7 @@ node {
       keepAll: false,
       reportDir: 'app/coverage',
       reportFiles: 'index.html',
-      reportName: "Coverage Report"
+      reportName: "Code Coverage Report"
     ])
   }
 
@@ -31,7 +31,7 @@ node {
       keepAll: false,
       reportDir: 'api',
       reportFiles: 'test-results.html',
-      reportName: "Acceptance Report"
+      reportName: "Acceptance Test Results"
     ])
   }
 
