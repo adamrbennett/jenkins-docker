@@ -1,5 +1,7 @@
 var reporter = require('cucumber-html-reporter');
 
+process.chdir(__dirname);
+
 var options = {
     theme: 'bootstrap',
     jsonFile: 'test-results.json',
