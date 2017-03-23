@@ -1,7 +1,10 @@
 FROM jenkins:latest
 
-ENV JAVA_OPTS "-Dhudson.model.DirectoryBrowserSupport.CSP=\"default-src 'self';\""
+# allow inline css and javascript - this is potentially unsafe!
+# try more restrictive policies for production, e.g.: default-src 'self';
+ENV JAVA_OPTS "-Dhudson.model.DirectoryBrowserSupport.CSP="
 
+# install the jenkins plugins
 RUN /usr/local/bin/install-plugins.sh \
   ace-editor \
   ant \

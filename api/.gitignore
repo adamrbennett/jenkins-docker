@@ -1,7 +1,5 @@
 node_modules
 .idea
 coverage
-test-results.xml
-test-results.json
-test-results.html
+*test-results.*
 etc

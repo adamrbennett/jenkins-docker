@@ -22,7 +22,7 @@ node {
   stage('Acceptance Test') {
     nodejs.inside {
       sh 'npm -q install --prefix api'
-      sh './api/node_modules/cucumber/bin/cucumber.js ./api/features --format=json > ./api/test-results.json'
+      sh './api/node_modules/cucumber/bin/cucumber.js ./api/features --format=json > ./api/acceptance-test-results.json'
       sh 'node ./api/test-report.js'
     }
     publishHTML (target: [
@@ -30,7 +30,7 @@ node {
       alwaysLinkToLastBuild: false,
       keepAll: false,
       reportDir: 'api',
-      reportFiles: 'test-results.html',
+      reportFiles: 'acceptance-test-results.html',
       reportName: "Acceptance Test Results"
     ])
   }
