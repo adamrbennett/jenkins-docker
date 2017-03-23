@@ -24,6 +24,7 @@ node {
       sh 'npm -q install --prefix api'
       sh './api/node_modules/cucumber/bin/cucumber.js ./api/features --format=json > ./api/test-results.json'
     }
+    step($class: 'CucumberTestResultArchiver', testResults: 'api/test-results.json')
   }
 
   docker.withRegistry('http://localhost:5000/') {
