@@ -30,7 +30,7 @@ node {
       alwaysLinkToLastBuild: false,
       keepAll: false,
       reportDir: 'api',
-      reportFiles: 'test-report.html',
+      reportFiles: 'test-results.html',
       reportName: "Acceptance Report"
     ])
   }
