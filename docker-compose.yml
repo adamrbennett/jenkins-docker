@@ -23,23 +23,19 @@ services:
     hostname: registry
     ports:
       - "5000:5000"
-    # environment:
-    #   - REGISTRY_HTTP_SECRET=letmein
   app:
     image: jenkins-docker-app
     build:
       context: ./app
-      dockerfile: Dockerfile
     ports:
       - "80:80"
+    links:
+      - api:api
+    depends_on:
+      - api
     environment:
       - APP_PORT=80
-  unit-test:
-    image: jenkins-docker-unit-test
+  api:
+    image: jenkins-docker-api
     build:
-      context: ./app
-      dockerfile: Dockerfile.unit-test
-    links:
-      - app:app
-    depends_on:
-      - app
+      context: ./api
