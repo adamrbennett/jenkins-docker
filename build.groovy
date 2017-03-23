@@ -22,7 +22,7 @@ node {
   stage('Acceptance Test') {
     nodejs.inside {
       sh 'npm -q install --prefix api'
-      sh 'npm --prefix api test'
+      sh './api/node_modules/cucumber/bin/cucumber.js ./api/features --format=json > ./api/test-results.json'
     }
   }
 
