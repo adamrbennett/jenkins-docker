@@ -7,9 +7,6 @@ describe('order-form.component', function() {
 
         beforeEach(angular.mock.module('order'));
         beforeEach(angular.mock.module('services'));
-        beforeEach(angular.mock.module(function($provide) {
-            $provide.constant('apiRoot', 'http://localhost:3000');
-        }));
 
 
         it('should place the order', inject(function($rootScope, $componentController, $httpBackend, $mdDialog, apiRoot, orderService) {

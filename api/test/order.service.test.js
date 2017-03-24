@@ -1,10 +1,10 @@
 'use strict';
 
+const config = require('../config');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 const assert = chai.assert;
-const api = 'http://localhost:3000';
 
 chai.use(chaiHttp);
 
@@ -13,7 +13,7 @@ describe('order.service', () => {
   describe('#create', () => {
 
     it('should return a fulfilled order with an ID', (done) => {
-      chai.request(api).post('/orders', {}).end((err, res) => {
+      chai.request(config.apiRoot).post('/orders', {}).end((err, res) => {
         assert.notOk(err, 'error accessing api');
         res.should.have.status(200);
         res.body.should.be.an('object');

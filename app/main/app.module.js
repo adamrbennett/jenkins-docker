@@ -1,7 +1,7 @@
 var app = angular.
   module('coffeeMakerApp', [
+      'constants',
       'services',
       'order'
   ]);
-
-app.constant('apiRoot', 'http://localhost:3000');
+  

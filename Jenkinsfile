@@ -35,22 +35,29 @@ node {
     ])
   }
 
+  def apiImg
+  stage('Build') {
+    apiImg = docker.build("localhost:5000/jenkins-docker-api:${env.BUILD_NUMBER}", '-f api/Dockerfile api')
+  }
+
   stage('Integration Test') {
-    nodejs.inside {
-      sh 'npm -q install --prefix api'
-      sh 'TEST_DIR=./api ./api/node_modules/jenkins-mocha/bin/jenkins.js --no-coverage'
+    apiImg.withRun('-p 3000:80') {
+      nodejs.inside {
+        sh 'npm -q install --prefix api'
+        sh "API_ROOT='http://172.17.0.1:3000' TEST_DIR=./api ./api/node_modules/jenkins-mocha/bin/jenkins.js --no-coverage"
+      }
     }
   }
 
-  docker.withRegistry('http://localhost:5000/') {
-    def img
-
-    stage('Build') {
-      img = docker.build("localhost:5000/jenkins-docker-app:${env.BUILD_NUMBER}", '-f app/Dockerfile app')
-    }
-
-    stage('Publish') {
-      img.push()
-    }
-  }
+  // docker.withRegistry('http://localhost:5000/') {
+  //   def img
+  //
+  //   stage('Build') {
+  //     img = docker.build("localhost:5000/jenkins-docker-app:${env.BUILD_NUMBER}", '-f app/Dockerfile app')
+  //   }
+  //
+  //   stage('Publish') {
+  //     img.push()
+  //   }
+  // }
 }

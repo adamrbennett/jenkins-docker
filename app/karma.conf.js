@@ -23,6 +23,7 @@ module.exports = function(config) {
         'node_modules/babel-polyfill/dist/polyfill.js',
 
         'main/app.module.js',
+        'main/constants.module.js',
         'main/order/order.module.js',
         'main/services/services.module.js',
 

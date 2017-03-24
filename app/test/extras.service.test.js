@@ -7,9 +7,6 @@ describe('extras.service', function() {
         ];
 
         beforeEach(angular.mock.module('services'));
-        beforeEach(angular.mock.module(function($provide) {
-            $provide.constant('apiRoot', 'http://localhost:3000');
-        }));
 
         it('should return an array of objects with name properties', inject(function($httpBackend, apiRoot, extrasService) {
             $httpBackend.whenGET(apiRoot + '/extras').respond(200, mockExtras);
