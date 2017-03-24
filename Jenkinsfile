@@ -35,8 +35,10 @@ node {
     ])
   }
 
+  def appImg
   def apiImg
   stage('Build') {
+    appImg = docker.build("localhost:5000/jenkins-docker-app:${env.BUILD_NUMBER}", '-f app/Dockerfile app')
     apiImg = docker.build("localhost:5000/jenkins-docker-api:${env.BUILD_NUMBER}", '-f api/Dockerfile api')
   }
 
@@ -50,15 +52,10 @@ node {
     }
   }
 
-  // docker.withRegistry('http://localhost:5000/') {
-  //   def img
-  //
-  //   stage('Build') {
-  //     img = docker.build("localhost:5000/jenkins-docker-app:${env.BUILD_NUMBER}", '-f app/Dockerfile app')
-  //   }
-  //
-  //   stage('Publish') {
-  //     img.push()
-  //   }
-  // }
+  docker.withRegistry('http://localhost:5000/') {
+    stage('Publish') {
+      appImg.push()
+      apiImg.push()
+    }
+  }
 }
