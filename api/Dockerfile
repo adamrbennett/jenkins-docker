@@ -1,7 +1,7 @@
 FROM node:alpine
 
 # install app and start
-ENV APP_PORT 80
+ENV API_PORT 80
 
 EXPOSE 80 443
 
