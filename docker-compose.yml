@@ -23,23 +23,34 @@ services:
     hostname: registry
     ports:
       - "5000:5000"
-  app:
-    image: jenkins-docker-app
-    build:
-      context: ./app
+  registry-ui:
+    image: hyper/docker-registry-web
     ports:
-      - "2000:2000"
+      - "8088:8080"
     links:
-      - api:api
+      - registry:registry
     depends_on:
-      - api
+      - registry
     environment:
-      - APP_PORT=2000
-  api:
-    image: jenkins-docker-api
-    build:
-      context: ./api
-    ports:
-      - "3000:3000"
-    environment:
-      - APP_PORT=3000
+      - REGISTRY_URL=http://registry:5000/v2
+      - REGISTRY_NAME=localhost:5000
+  # app:
+  #   image: jenkins-docker-app
+  #   build:
+  #     context: ./app
+  #   ports:
+  #     - "2000:2000"
+  #   links:
+  #     - api:api
+  #   depends_on:
+  #     - api
+  #   environment:
+  #     - APP_PORT=2000
+  # api:
+  #   image: jenkins-docker-api
+  #   build:
+  #     context: ./api
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - APP_PORT=3000
