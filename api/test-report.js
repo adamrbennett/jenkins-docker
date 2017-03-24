@@ -4,8 +4,8 @@ process.chdir(__dirname);
 
 var options = {
     theme: 'bootstrap',
-    jsonFile: 'test-results.json',
-    output: 'test-results.html',
+    jsonFile: 'acceptance-test-results.json',
+    output: 'acceptance-test-results.html',
     reportSuiteAsScenarios: true,
     launchReport: false
     // metadata: {
