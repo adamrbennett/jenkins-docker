@@ -56,6 +56,9 @@ node {
     stage('Publish') {
       appImg.push()
       apiImg.push()
+
+      appImg.push('latest')
+      apiImg.push('latest')
     }
   }
 }
