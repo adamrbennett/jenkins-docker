@@ -5,7 +5,7 @@
   "main": "app.module.js",
   "scripts": {
     "test": "karma start",
-    "start": "node index.js"
+    "start": "gulp config && node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,9 +18,6 @@
     "angular-mocks": "1.5.11",
     "babel-polyfill": "^6.23.0",
     "chai": "^3.5.0",
-    "gulp": "^3.9.1",
-    "gulp-ng-constant": "^2.0.0-2",
-    "gulp-rename": "^1.2.2",
     "istanbul": "^0.4.5",
     "karma": "^1.5.0",
     "karma-chai": "^0.1.0",
@@ -35,6 +32,9 @@
     "sinon": "^2.1.0"
   },
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "gulp": "^3.9.1",
+    "gulp-ng-constant": "^2.0.0-2",
+    "gulp-rename": "^1.2.2"
   }
 }
