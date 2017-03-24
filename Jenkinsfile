@@ -46,6 +46,7 @@ node {
         sh 'npm -q install --prefix api'
         sh "API_ROOT='http://172.17.0.1:3000' TEST_DIR=./api ./api/node_modules/jenkins-mocha/bin/jenkins.js ./api/test --no-coverage"
       }
+      junit 'api/xunit.xml'
     }
   }
 
