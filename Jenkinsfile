@@ -43,10 +43,10 @@ node {
   }
 
   stage('Integration Test') {
-    apiImg.withRun('-p 3000:80') {
-      nodejs.inside {
+    apiImg.withRun('--name api -p 3000:80') {
+      nodejs.inside('--link api:api') {
         sh 'npm -q install --prefix api'
-        sh "API_ROOT='http://172.17.0.1:3000' TEST_DIR=./api ./api/node_modules/jenkins-mocha/bin/jenkins.js ./api/test --no-coverage"
+        sh "API_ROOT='http://api:3000' TEST_DIR=./api ./api/node_modules/jenkins-mocha/bin/jenkins.js ./api/test --no-coverage"
       }
       junit 'api/xunit.xml'
     }
