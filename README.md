@@ -35,7 +35,7 @@ Jenkins must also check out source code from github during the build, and so it 
 1. Execute `docker-compose up` from the repository root to start all containers.
 
 ## The Pipeline
-The Jenkins build pipeline consists of a series of steps which test various functions of the app and api, as the code moves through various stages of increasingly production-like environments. The pipeline definition is declared in the `Jenkinsfile` at the root of this repository, and is read by Jenkins when performing a build.
+The Jenkins build pipeline consists of a series of steps which prepares the code for release and tests various functions of the app and api, as the code moves through stages of increasingly production-like environments. The pipeline definition is declared in the `Jenkinsfile` at the root of this repository, and is read by Jenkins when performing a build -- this is a good place to start if you want a deeper understanding of all that is involved in testing and releasing.
 
 #### Unit Test Step
 > At the moment, only the app has unit tests. Unit tests for the api will be added later.
