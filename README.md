@@ -25,7 +25,7 @@ Jenkins must also check out source code from github during the build, and so it 
 1. Execute `docker-compose up jenkins registry registry-ui` from the repository root to start the containers necessary to support the build pipeline.
 1. Navigate to `http://localhost:8080` to access the Jenkins CI console and login as `abennett`/`letmein`, then build the `docker-pipeline` job.
 1. Navigate to `http://localhost:8088` to access the Docker registry web UI.
-> NOTE: The app and api containers do not need to be running to support the build pipeline. Jenkins will build the images and run the containers itself. However, the app and api containers are part of the compose file so they can be started with ease.
+> NOTE: The app and api containers do not need to be running to support the build pipeline. Jenkins will build the images and run the containers itself. However, the app and api containers are part of the compose file so they can be started with ease for testing and development.
 
 #### Start the app and api
 1. Execute `docker-compose up app api` from the repository root to start the app and api containers.
