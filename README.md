@@ -83,5 +83,9 @@ Documentation is generated from code artifacts (e.g.: tests, feature specificati
 
 Containers deployed to production, and any other actions necessary for release are performed.
 
+## Notes
+
+1. Most of the things you might want to change are declared in the `docker-compose.yml` file located at the repository root. Items such as ports and URLs are declared here and can be changed to suit your environment, for example to resolve port conflicts.
+
 ## Maintainer
 Adam Bennett (adam.bennett@pointsource.com)
